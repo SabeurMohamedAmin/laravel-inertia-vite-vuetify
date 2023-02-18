@@ -11,6 +11,12 @@
 
 Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
 
+## to Use this just clone the repo and run the command:
+composer install
+
+npm install
+
+
 ALL Steps in the txt File: laravel-inertia-vite-vuetify Steps
 
 ## LARAVEL
