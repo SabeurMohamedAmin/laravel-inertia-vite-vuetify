@@ -1,0 +1,232 @@
+
+Create Laravel App
+
+1)-composer create-project laravel/laravel laravel-inertia-vite-vuetify
+OR
+laravel new laravel-inertia-vite-vuetify
+
+
+Add Breeze for our app (NOT REQUIRED)
+
+composer require laravel/breeze --dev
+php artisan breeze:install vue
+
+
+Create Server Side InertiaJS
+
+2)-composer require inertiajs/inertia-laravel
+
+
+Define the Root Template that will connecte Inertia(app.blade.php)
+3) link inertia to laravel
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+    @vite('resources/js/app.js')
+    @inertiaHead
+  </head>
+  <body>
+    @inertia or <!-- -->
+  </body>
+</html>
+
+
+!- Note @inertia and @inertiaHead  are custome directives out of the box inertiaJS.
+
+
+Add InertiaJS middleware
+
+php artisan inertia:middleware
+
+after adding the midlleware refister it in the Kernel
+App\Http\Kernel
+
+'web' => [
+    // ... InertiaJS Middleware
+    \App\Http\Middleware\HandleInertiaRequests::class,
+],
+
+
+after that create a directory in resources/js name it [Pages]  IT MUST BE NAMED Pages With First Letter Capitalize
+
+under the directory Page add a file name it Welcome.vue
+
+
+after that create Route en routes/web
+
+Route::get('/', function () {
+    return Inertia::render('Welcome'); // Welcome is vueJS Component in Pages directory.
+
+
+Install NodeJs.
+
+NOW INSTALL INERTIAjs FOR THE CLIENT-SIDE
+npm install @inertiajs/vue3
+
+install vueJS 3
+npm init vue@latest
+npm install
+
+install Vuetify 3
+
+npm add vuetify@^3.0.6
+npm install
+
+install icons for vuetify
+npm install @mdi/font
+
+
+_____________________
+npm install --save-dev vitejs/plugin-vue
+npm install --save-dev laravel-vite-plugin
+npm install --save-dev vite-plugin-vuetify
+
+after installing npm package of inertiaJS Vue3 and Vuetify 3 Initialize The InertiaJS app for client-side
+
+
+import './bootstrap';
+import '../css/app.css';
+
+import { createApp, h } from 'vue';
+import{Head, Link} from '@inertiajs/vue3';
+import { createInertiaApp } from '@inertiajs/vue3';
+import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
+import { ZiggyVue } from '../../vendor/tightenco/ziggy/dist/vue.m';
+
+
+//Here comes vuetify settings
+import { createVuetify } from 'vuetify';
+
+//After Enabling treeshaking in vite.config no need for these
+//import * as components from 'vuetify/components'
+//import * as directives from 'vuetify/directives'
+// Styles
+
+import '@mdi/font/css/materialdesignicons.css';
+import 'vuetify/styles';
+
+
+createInertiaApp({
+  title: (title) => `${title} - ${appName}`,
+  //resolve: (name) => resolvePageComponent(
+  //    `./Pages/${name}.vue`, 
+  //    import.meta.glob('./Pages/**/*.vue')),
+
+  resolve: (name) => {
+    const page = resolvePageComponent(`./Pages/${name}.vue`, import.meta.glob('./Pages/**/*.vue'));
+      
+    page.then( (module) => {
+      module.default.layout = module.default.layout ; // || Layout Make Layout Global
+    });
+      
+    return page;
+  },
+
+  setup({ el, App, props, plugin }) {
+    const vuetify = createVuetify({
+      theme: {
+        themes: {
+          light: {dark: false},
+        },
+      },
+    });
+    return createApp({ render: () => h(App, props) })
+      .use(plugin).use(vuetify).use(ZiggyVue, Ziggy).component('InertiaHead', Head)
+      .component('InertiaLink', Link)
+      .mount(el);
+  },
+  progress: {
+    color: '#4B5563',
+    showSpinner:true
+	},
+});
+
+
+
+Now we Need to Config vite in vite.config.js
+
+import { defineConfig } from 'vite';
+import laravel from 'laravel-vite-plugin';
+import vue from '@vitejs/plugin-vue';
+// This Will Enable TreeShacking
+import vuetify from 'vite-plugin-vuetify';
+
+export default defineConfig({
+  server: {hmr: true},
+  plugins: [
+    laravel({
+      input: 'resources/js/app.js',
+      refresh: true,
+    }),
+    vue({
+      template: {
+        transformAssetUrls: { base: null, includeAbsolute: false }
+      },
+    }),
+    vuetify(),
+  ],
+});
+
+
+
+Now install ESlint  
+
+npm install --save-dev eslint eslint-plugin-vue
+
+
+Now install Prettier
+
+npm install --save-dev prettier
+
+
+Now We Gona Config our Eslint and prettier, to do that create file next to vite.config.js  name it .eslintrc.js
+add these settings :
+
+
+//.eslintrc.js
+module.exports = {
+  env: {
+    node: true,
+  },
+  extends: [
+    'eslint:recommended',
+    'plugin:vue/vue3-recommended',
+    "prettier",
+  ],
+  rules: {
+    // override/add rules settings here, such as:
+    indent:['error', 2],
+    semi:['warn', 'always'],
+    'comma-dangle':['warn', 'always-multiline'],
+    
+    //VUE RULES
+    "vue/v-on-event-hyphenation": ["error", "always", {
+      "autofix": true,
+      "ignore": [],
+    }],
+    'vue/no-unused-vars': 'error',
+    'vue/singleline-html-element-content-newline':'off',
+    'vue/multi-word-component-names': 'off',
+    'vue/require-default-prop': 'off',
+    'vue/max-attributes-per-line': 'off',
+    'vue/no-v-html':'off',
+  },
+  'globals':{
+    'route':'writable', //this is power by Ziggy to expose routes
+    'Ziggy':'writable', //?? i dont know why it is not defined
+  },
+};
+
+open two(2) terminal in VScode and lunch artisan and vite
+
+php artisan serve
+
+npm run dev
+
+
+
+!Dont Forget to migrate db
+ENJOY
