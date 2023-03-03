@@ -23,7 +23,32 @@ Route::get('/', function () {
         'laravelVersion' => Application::VERSION,
         'phpVersion' => PHP_VERSION,
     ]);
-});
+})->name('home');
+
+// For Developping Only
+Route::get('/cb', function () {
+    return Inertia::render('Build/ComponentBuild')
+        ->with('success', 'test for flash');
+})->name('component.build');
+
+Route::get('/cards', function () {
+    return Inertia::render('Build/Cards')
+        ->with('success', 'test for flash');
+})->name('cards');
+// For Developping Only
+
+Route::get('/about', function () {
+    return Inertia::render('HomePage', [
+        'canLogin' => Route::has('login'),
+        'canRegister' => Route::has('register'),
+        'laravelVersion' => Application::VERSION,
+        'phpVersion' => PHP_VERSION,
+    ]);
+})->name('about');
+
+Route::get('/shop', function () {
+    return Inertia::render('ShopPage', []);
+})->name('shop');
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');

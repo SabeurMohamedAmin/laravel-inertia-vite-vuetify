@@ -3,22 +3,36 @@
         {
           idLink: "side-nav-link-1",
           titleLink: "Home",
-          urlLink: "./",
-          componentName: "home",
+          routeName: "home",
+          componentName: "HomePage",
           iconCode: "mdi-home",
+        },
+        {
+          idLink: "side-nav-link-2",
+          titleLink: "Shop",
+          routeName: "shop",
+          componentName: "ShopPage",
+          iconCode: "mdi-store",
         },
         {
           idLink: "side-nav-link-1",
           titleLink: "Component Builder",
-          urlLink: "./cb",
+          routeName: "component.build",
           componentName: "ComponentBuild",
           iconCode: "mdi-account",
+        },        
+        {
+          idLink: "side-nav-link-1",
+          titleLink: "Cards Product",
+          routeName: "cards",
+          componentName: "Cards",
+          iconCode: "mdi-cards",
         },
         {
           idLink: "side-nav-link-2",
           titleLink: "About",
-          urlLink: "/about",
-          componentName: "about",
+          routeName: "about",
+          componentName: "About",
           iconCode: "mdi-note",
         },
       ];
@@ -27,22 +41,25 @@
 <template>
     <v-list density="compact">
       <v-list-subheader>REPORTS</v-list-subheader>
-  
-      <v-list-item
+      <Link         
         v-for="navLink in sideMenuLinks"
         :key="navLink.idLink"
-        :to="{ name: navLink.componentName }"
+        :href=" route(navLink.routeName)"
+      >
+       <v-list-item
         active-color="primary"
         rounded="lg"
         exact
         class="ma-1"
         tabindex="9"
-      >
+        >
         <template v-slot:prepend>
           <v-icon :icon="navLink.iconCode"></v-icon>
         </template>
   
         <v-list-item-title v-text="navLink.titleLink"></v-list-item-title>
-      </v-list-item>
+      </v-list-item>     
+      </Link>
+
     </v-list>
   </template>  

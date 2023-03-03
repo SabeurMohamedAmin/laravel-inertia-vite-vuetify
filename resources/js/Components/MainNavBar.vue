@@ -1,10 +1,14 @@
 <!--this component has been used in <MainLayout/> -->
 <script setup>
-import { defineEmits, computed, ref, getCurrentInstance } from "vue";
+import { computed, ref, getCurrentInstance } from "vue";
+import { usePage } from '@inertiajs/vue3'
+
+// Declaring and using emits
+const emit = defineEmits(['navDrawerSwitcher', 'cartDrawerSwitcher', 'toggleTheme']);
 
 // TOOGLE AND ACTIVE THE SHP BTN
-let activeButtonShop = computed(() => {
-  return route().name === "shop" ? true : false;
+const activeButtonShop = computed(() => {
+  return route('home')+usePage().url === route('component.build') ? true : false;
 });
 
 // CHECKING FOR THE THEME USED
@@ -17,8 +21,7 @@ let isLightTheme = computed(() => {
 let themeIconDark = ref("mdi-moon-waning-crescent");
 let themeIconLight = ref("mdi-weather-sunny");
 
-// Declaring and using emits
-let emit = defineEmits();
+
 function navigationDrawerToggel() {
   emit("navDrawerSwitcher");
 }
@@ -42,30 +45,34 @@ function darkLightTheme() {
       </v-app-bar-nav-icon>
   
       <!--THIS IS FOR LOGO-->
+    <Link :href="route('home')">
       <v-btn
+      :active="false"
         class="mx-2"
         rounded="lg"
         variant="text"
         icon="mdi-dialpad"
         color="purple-darken-2"
-        :active="false"
         size="large"
-        :to="{ name: 'home' }"
         tabindex="6"
       >
       </v-btn>
+    </Link>
+
   
       <!--THIS IS FOR SHOP BTN-->
-      <v-btn
-        class="mx-2"
-        rounded="lg"
-        variant="text"
-        :active="activeButtonShop"
-        :to="{ name: 'shop' }"
-        tabindex="6"
-      >
+      <Link :href="route('component.build')">
+        <v-btn
+          :active="activeButtonShop"
+          class="mx-2"
+          rounded="lg"
+          variant="text"
+          tabindex="6"
+        >
         All Categories
-      </v-btn>
+        </v-btn>
+      </Link>
+
   
       <v-spacer />
       <v-btn
@@ -108,4 +115,3 @@ function darkLightTheme() {
       ></v-btn>
     </v-app-bar>
   </template>
-    

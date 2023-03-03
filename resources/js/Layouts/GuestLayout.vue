@@ -1,19 +1,18 @@
 <script setup>
-import ApplicationLogo from '@/Components/ApplicationLogo.vue';
-import { Link } from '@inertiajs/vue3';
 import { ref, onMounted } from "vue";
+import AlertInfo from '@/Components/AlertInfo.vue';
 import LeftNavBar from "@/Components/LeftNavBar.vue";
 import ShoppingCard from "@/Components/ShoppingCard.vue";
 import MainNavBar from "@/Components/MainNavBar.vue";
 import Search from "@/Pages/Search.vue";
   
+const props = defineProps(['flash', 'success']);
   // Grub the previos choosed Theme from browser
   onMounted(() => {
     if (localStorage.getItem("choosedTheme")) {
       themeName.value = localStorage.getItem("choosedTheme");
     }
   });
-  
   const navigationDrawer = ref(false);
   const cartDrawer = ref(false);
   let themeName = ref("light");
@@ -26,14 +25,17 @@ import Search from "@/Pages/Search.vue";
     // Store the choosing Theme in browser
     localStorage.setItem("choosedTheme", themeName.value);
   }
+  function clearFlash(){
+    props.flash ? props.flash={failed:null, succes:null} : '';
+  }
 </script>
 <template>
     <v-app id="inspire" :theme="themeName">
       <!--DISPLAY THE PAGE NAVIGATION BAR  -->
       <MainNavBar
-        @navDrawerSwitcher="navigationDrawer = !navigationDrawer"
-        @cartDrawerSwitcher="cartDrawer = !cartDrawer"
-        @toggleTheme="switchTheme"
+        @nav-drawer-switcher="navigationDrawer = !navigationDrawer"
+        @cart-drawer-switcher="cartDrawer = !cartDrawer"
+        @toggle-theme="switchTheme"
       />
   
       <!--DISPLAY THE LEFT PAGE NAVIGATION DRAWER  -->
@@ -55,7 +57,7 @@ import Search from "@/Pages/Search.vue";
         style="max-width: 580px; width: 100vw"
       >
         <!--DISPLAY DRAWER NAVIGATION LIST-->
-        <ShoppingCard @btnCloseCartDrawer="cartDrawer = !cartDrawer" />
+        <ShoppingCard @btn-close-cart-drawer="cartDrawer = !cartDrawer" />
       </v-navigation-drawer>
   
       <!--DISPLAY THE PAGE CONTENT  -->
@@ -63,5 +65,9 @@ import Search from "@/Pages/Search.vue";
         <Search />
         <slot />
       </v-main>
+      <AlertInfo 
+        v-if="props.flash" :flash="props.flash" 
+        @clear-flash-message="clearFlash"
+      />
     </v-app>
   </template>  
