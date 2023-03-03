@@ -29,7 +29,7 @@
       },
     },
   });
-  
+
   let loading = ref(false);
   let isActive = ref(false);
 </script>
@@ -61,7 +61,7 @@
                     productId: props.productDetails.id,
                 },
             }"
-        >
+      >
         <!-- Loading Line -->
         <template v-slot:loader="{ isActive }">
           <v-progress-linear
@@ -82,7 +82,7 @@
           :src="props.productDetails.image.sourceUrl"
           :alt="props.productDetails.image.altText"
         />
-  
+
         <v-card-item class="px-1 pa-0 ma-0">
           <v-card-title
             tag="h2"
@@ -105,10 +105,11 @@
                 class="pa-1 me-1"
               />
             </v-card-subtitle>
-            <h3
-              class="pa-0 ma-0 text-center v-col-6 text-body"
-              v-html="props.productDetails.price"
-            ></h3>
+              <h3
+                class="pa-0 ma-0 text-center v-col-6 text-body"
+                v-html="props.productDetails.price"
+              >
+              </h3>
           </v-row>
         </v-card-item>
   
@@ -126,7 +127,6 @@
         </v-card-text>
       </v-card>
     </Link>
-
     </v-lazy>
 </template>
   

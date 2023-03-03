@@ -9,12 +9,12 @@
   const  {name}  = useDisplay();
   const height = computed(() => {
     switch (name.value) {
-      case 'xs' : return '400px'
-      case 'sm': return '420px'
-      case 'md': return '420px'
-      case 'lg': return '420px'
-      case 'xl': return '420px'
-      case 'xxl': return '420px'
+      case 'xs'     : return '400px'
+      case 'sm'    : return '420px'
+      case 'md'    : return '420px'
+      case 'lg'      : return '420px'
+      case 'xl'      : return '420px'
+      case 'xxl'     : return '420px'
       }
       return undefined
     });
@@ -29,14 +29,13 @@
 </script>
 
 <template>
-  <v-row  class="h-inset ma-1 my-4">
-        <v-col cols="12" sm="7" lg="8" class="py-0 mb-4">
+  <v-row  class="ma-1 my-4">
+        <v-col cols="12" sm="7" lg="8" class="py-0 mb-2">
           <Splide :options="options" aria-label="My Favorite Images">
             <SplideSlide v-for="i in 8" :key="i" >
               <v-img
                 :src="'https://picsum.photos/id/'+(i+75)+'/700'"
-                min-heught="height" cover
-                class="rounded-md v-height"
+                cover class="rounded-md v-height"
               />
             </SplideSlide>
           </Splide>                                                                             
@@ -95,10 +94,7 @@
   .splide__pagination__page.is-active{
     background: #35eb9ade;
   }
-  .h-inset{
-    height: calc(100vh - 110px);
-  }
-  .v-height{
+  .v-img.v-height{
     height: v-bind(height);
   }
 </style>
