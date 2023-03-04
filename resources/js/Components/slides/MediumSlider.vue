@@ -16,7 +16,7 @@
 </script>
 
 <template>
-  <v-row  class="mx-0 my-4">
+  <v-row  class="mx-0">
     <v-col cols="12" class="py-0 mb-4">
       <Splide :options="options" aria-label="My Favorite Images" class="mx-0">
         <SplideSlide v-for="i in 8" :key="i" >          

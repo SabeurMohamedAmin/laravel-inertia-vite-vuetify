@@ -2,15 +2,12 @@
 <script setup>
 import { computed, ref, getCurrentInstance } from "vue";
 import { usePage } from '@inertiajs/vue3'
-
   // Declaring and using emits
   const emit = defineEmits(['navDrawerSwitcher', 'cartDrawerSwitcher', 'toggleTheme']);
-
   // TOOGLE AND ACTIVE THE SHP BTN
   const activeButtonShop = computed(() => {
     return route('home')+usePage().url === route('component.build') ? true : false;
   });
-
   // CHECKING FOR THE THEME USED
   let internalInstance = getCurrentInstance();
   let isLightTheme = computed(() => {
@@ -33,7 +30,7 @@ import { usePage } from '@inertiajs/vue3'
 </script>
 
 <template>
-  <v-app-bar elevation="0" height="54" border>
+  <v-app-bar elevation="0" height="54" border class="">
       <!--THIS IS FOR MENU-->
     <v-app-bar-nav-icon
       rounded="lg"
@@ -45,8 +42,8 @@ import { usePage } from '@inertiajs/vue3'
     <!--THIS IS FOR LOGO-->
     <Link :href="route('home')">
       <v-btn
-      :active="false"
-        class="mx-2"
+        :active="false"
+        class="mx-1"
         rounded="lg"
         variant="text"
         icon="mdi-dialpad"
@@ -56,17 +53,17 @@ import { usePage } from '@inertiajs/vue3'
       >
       </v-btn>
     </Link>
-
     <!--THIS IS FOR SHOP BTN-->
     <Link :href="route('component.build')">
       <v-btn
         :active="activeButtonShop"
-        class="mx-2"
+        class="mx-2 text-small"
+        size="small"
         rounded="lg"
         variant="text"
         tabindex="6"
       >
-        All Categories
+        Shop
       </v-btn>
     </Link>
 
@@ -90,7 +87,7 @@ import { usePage } from '@inertiajs/vue3'
     <v-btn
       id="btn_search_overlay"
       rounded="lg"
-      class="mx-2"
+      class="mx-1"
       variant="text"
       icon="mdi-magnify"
       color="black-lighten-2"
@@ -103,7 +100,7 @@ import { usePage } from '@inertiajs/vue3'
       id="btn_cart"
       rounded="lg"
       variant="outlined"
-      class="mx-2"
+      class="mr-2"
       icon="mdi-cart-variant"
       color="black-lighten-2"
       @click="cartDrawerToggel"

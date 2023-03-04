@@ -1,10 +1,10 @@
 <!-- this component has been used in  -->
 <script setup>
     import {ref} from 'vue';
-    const loading = ref(false);
+    const   loading = ref(false);
     const   selection = ref(1);
-    const  isActive= ref(false);
-    const reserve = ()=> {
+    const   isActive= ref(false);
+    const   reserve = ()=> {
         this.loading = true;
         setTimeout(() => (this.loading = false), 2000);
       };
@@ -21,7 +21,7 @@
       }"
       min-height="200"
       transition="fade-transition"
-      class="ma-2"
+      class="my-2 mx-1"
     >
     <Link :href="route('home')">
         <v-card

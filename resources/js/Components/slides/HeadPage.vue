@@ -30,7 +30,7 @@
 
 <template>
   <v-row  class="ma-1 my-4">
-        <v-col cols="12" sm="7" lg="8" class="py-0 mb-2">
+        <v-col cols="12" sm="7" lg="8" class="py-0 mb-3">
           <Splide :options="options" aria-label="My Favorite Images">
             <SplideSlide v-for="i in 8" :key="i" >
               <v-img
@@ -42,16 +42,7 @@
         </v-col>
         <v-col cols="12" sm="5" lg="4" class="py-0">
           <v-row>
-              <v-col cols=  "6">
-                  <SmallCard />
-              </v-col>
-              <v-col cols="6">
-                  <SmallCard />
-              </v-col>
-              <v-col cols= "6">
-                  <SmallCard />
-              </v-col>
-              <v-col cols="6">
+              <v-col xs="6" sm="6" v-for="i in 4" :key="i">
                   <SmallCard />
               </v-col>
           </v-row>
