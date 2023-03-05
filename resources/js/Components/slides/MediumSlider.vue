@@ -33,6 +33,7 @@
     width: 25px;
     border-radius: 2px;
     border: 1px solid #35eb9ade;
+    transition: all 350ms ease-in-out;
   }
   .splide__arrows .splide__arrow>svg{
     zoom: .8;
