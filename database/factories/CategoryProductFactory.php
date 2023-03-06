@@ -2,14 +2,14 @@
 
 namespace Database\Factories;
 
-use App\Models\Tag;
 use App\Models\Product;
+use App\Models\Category;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\ProductTag>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\CategoryProduct>
  */
-class ProductTagFactory extends Factory
+class CategoryProductFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -18,11 +18,11 @@ class ProductTagFactory extends Factory
      */
     public function definition(): array
     {
+        $category = Category::inRandomOrder()->first();
         $product = Product::inRandomOrder()->first();
-        $tag = Tag::inRandomOrder()->first();
         return [
+            'category_id' => $category->id,
             'product_id' => $product->id,
-            'tag_id' => $tag->id,
             'created_at' => now(),
             'updated_at' => now(),
         ];

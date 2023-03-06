@@ -26,7 +26,7 @@ class ProductFactory extends Factory
         return [
             'category_id' => $category->id,
             'discount_id' => $discount->id,
-            'tags_id' => $tag->id,
+            'tag_id' => $tag->id,
             'name' => fake()->sentence(3),
             'slug' => fake()->unique()->slug(3),
             'amount' => fake()->randomFloat(2, 10, 1000),

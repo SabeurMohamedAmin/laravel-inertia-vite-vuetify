@@ -17,6 +17,8 @@ class UserFactory extends Factory
      */
     public function definition(): array
     {
+        $jsonData = fake()->imageUrl();
+        $images = fake()->randomElement([null, $jsonData, $jsonData, $jsonData]);
         return [
             'first_name' => fake()->firstName(),
             'last_name' => fake()->lastName(),
@@ -24,7 +26,7 @@ class UserFactory extends Factory
             'email' => fake()->unique()->safeEmail(),
             'phone' => fake()->numerify('##########'),
             // set to null as it's nullable
-            'image' => null,
+            'image' => $images,
             'street' => fake()->streetAddress(),
             'city' => fake()->city(),
             'state' => fake()->state(),

@@ -16,8 +16,9 @@ class CategoryFactory extends Factory
      */
     public function definition(): array
     {
+
         return [
-            'parent_id' => null,
+            'parent_id' => fake()->randomElement([1, 2, 3, 4, 5, 6, null]),
             'name' => fake()->word,
             'slug' => fake()->slug,
             'description' => fake()->sentence,

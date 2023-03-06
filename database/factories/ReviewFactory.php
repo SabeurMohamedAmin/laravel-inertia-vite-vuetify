@@ -23,7 +23,8 @@ class ReviewFactory extends Factory
         $randomNumber = fake()->numberBetween(0, 500);
         $user = User::inRandomOrder()->first();
         $product = Product::inRandomOrder()->first();
-
+        $jsonData = fake()->imageUrl();
+        $images = fake()->randomElement([null, $jsonData, $jsonData]);
 
         return [
             'parent_id' => 0,
@@ -33,7 +34,7 @@ class ReviewFactory extends Factory
             'rate' => $rate,
             'title' => $isApproved ? fake()->sentence : null,
             'body' => fake()->paragraphs(2, true),
-            'images' => null,
+            'images' => json_encode($images),
             'helpful_count' => $randomNumber,
             'not_helpful_count' => $randomNumber,
         ];

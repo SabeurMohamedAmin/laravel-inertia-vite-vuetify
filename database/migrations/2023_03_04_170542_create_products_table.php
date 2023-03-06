@@ -19,7 +19,7 @@ return new class extends Migration
                 ->onUpdate('cascade')->onDelete('cascade');
             // Add this line to create the pivot table for 
             // the many-to-many relationship
-            $table->foreignId('tags_id')->nullable()->constrained()
+            $table->foreignId('tag_id')->nullable()->constrained()
                 ->onUpdate('cascade')->onDelete('cascade');
 
             $table->string('name', 255);

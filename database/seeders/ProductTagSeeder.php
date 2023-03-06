@@ -2,17 +2,17 @@
 
 namespace Database\Seeders;
 
-use App\Models\Discount;
-use Illuminate\Database\Seeder;
+use App\Models\ProductTag;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Database\Seeder;
 
-class DiscountSeeder extends Seeder
+class ProductTagSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        Discount::factory(5)->create();
+        ProductTag::factory(15)->create();
     }
 }

@@ -10,8 +10,6 @@ use Illuminate\Foundation\Application;
 
 class ProductController extends Controller
 {
-
-
     //: This method should display a list of all products in your store.
     public function index()
     {
