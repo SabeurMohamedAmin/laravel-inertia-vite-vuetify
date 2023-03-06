@@ -23,6 +23,13 @@
         },        
         {
           idLink: "side-nav-link-1",
+          titleLink: "Add New Product",
+          routeName: "add.product",
+          componentName: "ComponentBuild",
+          iconCode: "mdi-plus",
+        },
+        {
+          idLink: "side-nav-link-1",
           titleLink: "Cards Product",
           routeName: "cards",
           componentName: "Cards",

@@ -1,8 +1,8 @@
 <script setup>
-const props = defineProps({
-    title:{type : String, default : 'Random Title'},
-    expendedLink:{type : String, default : '/'},
-})
+    const props = defineProps({
+        title:{type : String, default : 'Random Title'},
+        expendedLink:{type : String, default : '/'},
+    })
 </script>
 
 <template>

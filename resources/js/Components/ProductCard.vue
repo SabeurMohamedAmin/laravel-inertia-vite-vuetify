@@ -1,22 +1,21 @@
 <!-- this component has been used in <ComponentBuild/> <About/> v-if="props.startLoading"-->
 <script setup>
-import { ref } from "vue";
-import ProductCardSkeleton from "@/Components/card/ProductCardSkeleton.vue";
-const name = "ProductCard";
+  import { ref } from "vue";
+  import ProductCardSkeleton from "@/Components/card/ProductCardSkeleton.vue";
+  const name = "ProductCard";
 
-let props = defineProps({
-  startLoading: Boolean,
-  productDetails: {
-    type: Object,
-  },
-});
-let productDetails = props.productDetails.node;
-console.log(props.productDetails.node);
-let cardStartLoading = ref(false);
+  let props = defineProps({
+    startLoading: Boolean,
+    productDetails: {
+      type: Object,
+    },
+  });
+  let productDetails = props.productDetails.node;
+  let cardStartLoading = ref(false);
 
-let sectionProductReviews = () => {
-  console.log("show me The reviews Of this Product.");
-};
+  let sectionProductReviews = () => {
+    console.log("show me The reviews Of this Product.");
+  };
 </script>
 
 <template>

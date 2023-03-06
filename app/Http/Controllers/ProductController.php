@@ -2,17 +2,31 @@
 
 namespace App\Http\Controllers;
 
+use Inertia\Inertia;
+use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Foundation\Application;
 
 class ProductController extends Controller
 {
+
+
     //: This method should display a list of all products in your store.
     public function index()
     {
+        dd(Product::all()[1]);
+        return Inertia::render('HomePage', [
+            'canLogin' => Route::has('login'),
+            'canRegister' => Route::has('register'),
+            'laravelVersion' => Application::VERSION,
+            'phpVersion' => PHP_VERSION,
+        ]);
     }
     //: This method should display a form for adding a new product.
     public function create()
     {
+        return Inertia::render('Build/ComponentBuild');
     }
     //: This method should store the new product in the database after validating the input data.
     public function store()

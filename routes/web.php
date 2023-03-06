@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -16,14 +17,25 @@ use Inertia\Inertia;
 |
 */
 
-Route::get('/', function () {
+Route::get(
+    '/',
+    [ProductController::class, 'index']
+    /*
+function () {
     return Inertia::render('HomePage', [
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
         'laravelVersion' => Application::VERSION,
         'phpVersion' => PHP_VERSION,
     ]);
-})->name('home');
+}
+*/
+)->name('home');
+
+Route::get(
+    'add-new-product',
+    [ProductController::class, 'create']
+)->name('add.product');
 
 // For Developping Only
 Route::get('/cb', function () {

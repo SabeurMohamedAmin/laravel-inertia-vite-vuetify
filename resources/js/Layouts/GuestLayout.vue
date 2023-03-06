@@ -8,11 +8,11 @@
   
   const props = defineProps(['flash', 'success']);
   // Grub the previos choosed Theme from browser
-    onMounted(() => {
-      if (localStorage.getItem("choosedTheme")) {
-        themeName.value = localStorage.getItem("choosedTheme");
-      }
-    });
+  onMounted(() => {
+    if (localStorage.getItem("choosedTheme")) {
+    themeName.value = localStorage.getItem("choosedTheme");
+    }
+  });
   const navigationDrawer = ref(false);
   const cartDrawer = ref(false);
   let themeName = ref("light");
@@ -28,6 +28,7 @@
     props.flash ? props.flash={failed:null, succes:null} : '';
   }
 </script>
+
 <template>
     <v-app id="inspire" :theme="themeName">
       <!--DISPLAY THE PAGE NAVIGATION BAR  -->
@@ -68,4 +69,4 @@
         @clear-flash-message="clearFlash"
       />
     </v-app>
-  </template>
+</template>

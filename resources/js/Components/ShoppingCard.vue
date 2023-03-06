@@ -1,27 +1,26 @@
 <!--THIS COMPONENT IS USED IN <MainLayout/>-->
 <script setup>
-import {defineEmits} from 'vue';
- const props = defineProps({
+  const props = defineProps({
     cartDrawerStat: {
     type: Boolean,
     default: false
     }
-    });
-    const emit = defineEmits(['btnCloseCartDrawer']);
+  });
+  const emit = defineEmits(['btnCloseCartDrawer']);
 
-    const links = [
+  const links = [
         { title: "Products", icon: "mdi-shopping-outline" },
         { title: "Adresse", icon: "mdi-map-marker-account-outline"},
         { title: "Payment", icon: "mdi-currency-eur" },
       ];
-      const tabShopingCart = "Appetizers";
+  const tabShopingCart = "Appetizers";
 
-    const text = `Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+  const text = `Lorem ipsum dolor sit amet, consectetur adipiscing elit,
               sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
               Ut enim ad minim veniam, quis nostrud exercitation ullamco 
               laboris nisi ut aliquip ex ea commodo consequat.`;
 
-    function closeCartDrawer() {
+  function closeCartDrawer() {
         emit("btnCloseCartDrawer");
     }
 </script>
@@ -71,9 +70,9 @@ import {defineEmits} from 'vue';
         </v-window-item>
       </v-window>
     </v-card>
-  </template>
+</template>
   
-  <style scoped>
+<style scoped>
   .v-slide-group-item--active.v-tab--selected
     .v-btn__content
     > .v-icon--end.mdi-shopping-outline {
@@ -95,4 +94,4 @@ import {defineEmits} from 'vue';
     transition: transform 500ms ease-in-out;
     transform: scale(1.3);
   }
-  </style>  
+</style>  
