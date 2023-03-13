@@ -1,5 +1,5 @@
 <script setup>
-  import {reactive} from 'vue';
+  import {reactive, watch, computed} from 'vue';
   import {useForm} from '@inertiajs/vue3'
   import UploadImages from '@/Components/add-product/UploadImages.vue';
   defineEmits(['update-selected-files']);
@@ -39,18 +39,18 @@
   });
 
   const product = useForm({
-    name: '',
-    slug: '',
-    amount: null,
-    quantity: null,
-    description: '',
+    name: 'test',
+    slug: 'testte',
+    amount: 4,
+    quantity: 5,
+    description: 'cdslk nlknlsdk kl',
     images: [],
-    height: null,
-    width: null,
-    length: null,
-    weight: null,
-    meta_title: '',
-    meta_description: '',
+    height: 32,
+    width: 45,
+    length: 32,
+    weight: 25,
+    meta_title: 'dsfsdf ',
+    meta_description: 'fsdfsd f',
     meta_keywords: null,
     category_id: select.category.id,
     discount_id:select.category.id,
@@ -60,6 +60,12 @@
   const updateSelectedFiles = (data)=>{
     product.images = data;
   };
+
+const errorsImage = computed(()=>{
+  const filteredKeys = Object.keys(product.errors).filter(key => key.startsWith('images.'));  
+  return filteredKeys;
+})
+
 </script>
 
 <template>
@@ -79,6 +85,9 @@
               </v-file-input>
             -->
           </v-col>
+          <ul class="v-input__details d-flex flex-wrap text-error" v-if="errorsImage">
+           <li class="v-messages__message mx-4" v-for="name in errorsImage" :key="name">{{ product.errors[name] }}</li>
+          </ul>
         </v-row>
         <!-- End Upload Images -->
         <v-row>
