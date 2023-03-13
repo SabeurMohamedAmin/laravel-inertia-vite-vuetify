@@ -23,6 +23,10 @@ const appName =
     window.document.getElementsByTagName("title")[0]?.innerText || "Laravel";
 
 createInertiaApp({
+    //InertiaJS will only load the components that are needed
+    //will not expose the entire component structure to the client-side
+    lazy: true,
+
     title: (title) => `${title} - ${appName}`,
     //resolve: (name) => resolvePageComponent(
     //    `./Pages/${name}.vue`,
@@ -58,7 +62,7 @@ createInertiaApp({
             .mount(el);
     },
     progress: {
-        color: "#4B5563",
+        color: "#35eb9ade",
         showSpinner: true,
     },
 });
