@@ -2,13 +2,12 @@
 
 namespace Database\Factories;
 
-use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Tag>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\ProductImages>
  */
-class TagFactory extends Factory
+class ProductImagesFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -18,8 +17,7 @@ class TagFactory extends Factory
     public function definition(): array
     {
         return [
-            'uuid' => Str::uuid(),
-            'name' => fake()->word(),
+            //
         ];
     }
 }

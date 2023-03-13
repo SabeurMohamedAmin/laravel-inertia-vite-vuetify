@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\User;
+use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,14 +18,14 @@ class OrderFactory extends Factory
      */
     public function definition(): array
     {
-        $user = User::inRandomOrder()->first();
-
+        $user       = User::inRandomOrder()->first();
         $subtotal = fake()->randomFloat(2, 10, 1000);
-        $tax = fake()->randomFloat(2, 1, 10);
+        $tax        = fake()->randomFloat(2, 1, 10);
         $shipping = fake()->randomFloat(2, 5, 50);
-        $total = $subtotal + $tax + $shipping;
+        $total      = $subtotal + $tax + $shipping;
 
         return [
+            'uuid' => Str::uuid(),
             'user_id' => $user->id,
             'subtotal' => $subtotal,
             'tax' => $tax,

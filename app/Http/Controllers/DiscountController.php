@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Discount;
-use App\Http\Requests\StoreDiscountRequest;
+use Illuminate\Support\Facades\Request;
 use App\Http\Requests\UpdateDiscountRequest;
 
 class DiscountController extends Controller
@@ -27,7 +27,7 @@ class DiscountController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreDiscountRequest $request)
+    public function store(Request $request)
     {
         //
     }
@@ -51,7 +51,7 @@ class DiscountController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateDiscountRequest $request, Discount $discount)
+    public function update(Request $request, Discount $discount)
     {
         //
     }

@@ -11,18 +11,22 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('tags', function (Blueprint $table) {
+        Schema::create('product_images', function (Blueprint $table) {
             $table->id();
-            $table->string('uuid')->unique();
-            $table->string('name', 255);
+            $table->uuid();
+            $table->foreignId('product_id')
+                ->constrained()->onUpdate('cascade')->onDelete('cascade');
+            $table->string('name');
+            $table->string('path');
             $table->timestamps();
         });
     }
+
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('tags');
+        Schema::dropIfExists('product_images');
     }
 };

@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\User;
 use App\Models\Product;
+use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -22,6 +23,7 @@ class CartFactory extends Factory
         $product = Product::inRandomOrder()->first();
 
         return [
+            'uuid' => Str::uuid(),
             'user_id' => $user->id,
             'product_id' => $product->id,
             'quantity' => fake()->numberBetween(1, 24),

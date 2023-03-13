@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\Product;
 use App\Models\Category;
+use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -21,6 +22,7 @@ class CategoryProductFactory extends Factory
         $category = Category::inRandomOrder()->first();
         $product = Product::inRandomOrder()->first();
         return [
+            'uuid' => Str::uuid(),
             'category_id' => $category->id,
             'product_id' => $product->id,
             'created_at' => now(),

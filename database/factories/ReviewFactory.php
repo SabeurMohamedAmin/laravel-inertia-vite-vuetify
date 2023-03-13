@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\User;
 use App\Models\Product;
+use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -27,6 +28,7 @@ class ReviewFactory extends Factory
         $images = fake()->randomElement([null, $jsonData, $jsonData]);
 
         return [
+            'uuid' => Str::uuid(),
             'parent_id' => 0,
             'user_id' => $user->id,
             'product_id' => $product->id,

@@ -20,6 +20,7 @@ class UserFactory extends Factory
         $jsonData = fake()->imageUrl();
         $images = fake()->randomElement([null, $jsonData, $jsonData, $jsonData]);
         return [
+            'uuid' => Str::uuid(),
             'first_name' => fake()->firstName(),
             'last_name' => fake()->lastName(),
             'username' => fake()->unique()->userName(),

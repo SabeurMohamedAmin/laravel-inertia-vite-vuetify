@@ -1,6 +1,36 @@
 <!-- this component has been used in  -->
 <script setup>
     import {ref} from 'vue';
+
+    const props = defineProps({
+        productDetails: {
+            type: Object,   
+            default: {
+                id: '1234',
+                name: "Something name",
+                slug:'slug-something',
+                productTags: {
+                nodes: {
+                    name: ["apple", "cheeze"],
+                },
+                },
+                title: "Something Title",
+                amount: "139 €",
+                image: {
+                alt: "Some Alt Text",
+                url: "https://cdn.vuetifyjs.com/images/cards/cooking.png",
+                },
+                productCategories: {
+                nodes: [
+                    {
+                    id: "vkjl",
+                    },
+                ],
+                },
+            },
+        },
+    });
+
     const   loading = ref(false);
     const   selection = ref(1);
     const   isActive= ref(false);
@@ -23,14 +53,13 @@
       transition="fade-transition"
       class="my-2 mx-1"
     >
-    <Link :href="route('home')">
+    <Link :href="route('product',props.productDetails.slug)">
         <v-card
             :loading="loading"
             max-width="240"
             max-height="490"
             class="card-hover"
             tabindex="18"
-            :to="{ name: 'product' }"
         >
             <template v-slot:loader="{ isActive }">
             <v-progress-linear
@@ -48,7 +77,7 @@
             height="320"
             :aspect-ratio="3 / 4"
             lazy-src="https://picsum.photos/id/19/50/100"
-            src="https://cdn.vuetifyjs.com/images/cards/cooking.png"
+            :src="props.productDetails.image.url"
             >
             <template v-slot:placeholder>
                 <div class="d-flex align-center justify-center fill-height">
@@ -80,7 +109,7 @@
                 <v-icon color="error" icon="mdi-fire-circle" size="small"></v-icon>
                 <v-icon color="error" icon="mdi-fire-circle" size="small"></v-icon>
                 </v-card-subtitle>
-                <h3 class="">15€</h3>
+                <h3 class="">{{props.productDetails.amount}}€</h3>
             </v-row>
             </v-card-item>
     
@@ -91,9 +120,7 @@
                 title="Small plates, salads & sandwiches - an intimate setting with 12 indoor"
             >
                 <v-banner-text class="pa-0">
-                Small plates, salads & sandwiches - an intimate setting with 12
-                indoor Small plates, salads & sandwiches - an intimate setting with
-                12 indoor
+                {{props.productDetails.description}}
                 </v-banner-text>
             </v-banner>
     

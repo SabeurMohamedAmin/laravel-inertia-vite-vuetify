@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -23,6 +24,7 @@ class DiscountFactory extends Factory
         $endDate = fake()->optional()->dateTimeBetween($startDate, '+1 month');
 
         return [
+            'uuid' => Str::uuid(),
             'code' => fake()->unique()->text(10),
             'type' => $type,
             'value' => $value,

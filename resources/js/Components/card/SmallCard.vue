@@ -3,21 +3,21 @@
   import { ref} from "vue";
   let props = defineProps({
     productDetails: {
-      type: Object,
+      type: Object,   
       default: {
-        id: 1234,
-        productId: 1234,
+        id: '1234',
         name: "Something name",
+        slug:'slug-something',
         productTags: {
           nodes: {
             name: ["apple", "cheeze"],
           },
         },
         title: "Something Title",
-        price: "139 €",
+        amount: "139 €",
         image: {
-          altText: "Some Alt Text",
-          sourceUrl: "https://cdn.vuetifyjs.com/images/cards/cooking.png",
+          alt: "Some Alt Text",
+          url: "https://cdn.vuetifyjs.com/images/cards/cooking.png",
         },
         productCategories: {
           nodes: [
@@ -44,7 +44,7 @@
       max-width="180"
       transition="fade-transition"
     >
-    <Link :href="route('cards')">
+    <Link :href="route('product',props.productDetails.slug)">
       <v-card
             density="compact"
             :loading="loading"
@@ -54,13 +54,6 @@
             max-height="210"
             class="card-hover"
             tabindex="9"
-            :to="{
-                name: 'product',
-                params: {
-                    categoryId: props.productDetails.productCategories.nodes[0].id,
-                    productId: props.productDetails.id,
-                },
-            }"
       >
         <!-- Loading Line -->
         <template v-slot:loader="{ isActive }">
@@ -79,8 +72,8 @@
           height="120"
           :aspect-ratio="3 / 4"
           lazy-src="https://picsum.photos/id/56/25/20"
-          :src="props.productDetails.image.sourceUrl"
-          :alt="props.productDetails.image.altText"
+          :src="props.productDetails.image.url"
+          :alt="props.productDetails.image.alt"
         />
 
         <v-card-item class="px-1 pa-0 ma-0">
@@ -88,7 +81,7 @@
             tag="h2"
             lines="two"
             label="Sticky Banner"
-            title="alternative long title"
+            :title="props.productDetails.name"
             class="text-body-2 pt-1"
           >
             {{ props.productDetails.name }}
@@ -107,7 +100,7 @@
             </v-card-subtitle>
               <h3
                 class="pa-0 ma-0 text-center v-col-6 text-body"
-                v-html="props.productDetails.price"
+                v-html="props.productDetails.amount"
               >
               </h3>
           </v-row>

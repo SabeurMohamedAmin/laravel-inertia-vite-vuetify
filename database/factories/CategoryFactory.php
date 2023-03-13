@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -18,12 +19,13 @@ class CategoryFactory extends Factory
     {
 
         return [
-            'parent_id' => fake()->randomElement([1, 2, 3, 4, 5, 6, null]),
-            'name' => fake()->word,
-            'slug' => fake()->slug,
-            'description' => fake()->sentence,
-            'image' => fake()->imageUrl(),
-            'is_featured' => fake()->boolean,
+            'uuid' => Str::uuid(),
+            'parent_id'     => fake()->randomElement([1, 2, 3, 4, 5, 6, null]),
+            'name'           => fake()->word,
+            'slug'             => fake()->slug,
+            'description'    => fake()->sentence,
+            'image'           => fake()->imageUrl(),
+            'is_featured'    => fake()->boolean,
             'render_order' => fake()->numberBetween(0, 1000),
         ];
     }

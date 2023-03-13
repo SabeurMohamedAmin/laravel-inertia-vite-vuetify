@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\Tag;
 use App\Models\Product;
+use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -21,6 +22,7 @@ class ProductTagFactory extends Factory
         $product = Product::inRandomOrder()->first();
         $tag = Tag::inRandomOrder()->first();
         return [
+            'uuid' => Str::uuid(),
             'product_id' => $product->id,
             'tag_id' => $tag->id,
             'created_at' => now(),

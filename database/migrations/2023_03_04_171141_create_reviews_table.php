@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('reviews', function (Blueprint $table) {
             $table->id();
+            $table->string('uuid')->unique();
             $table->unsignedBigInteger('parent_id');
             $table->foreignId('user_id');
             $table->foreignId('product_id')->constrained()

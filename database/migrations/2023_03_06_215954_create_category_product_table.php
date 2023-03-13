@@ -11,18 +11,23 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('tags', function (Blueprint $table) {
-            $table->id();
+        Schema::create('category_product', function (Blueprint $table) {
             $table->string('uuid')->unique();
-            $table->string('name', 255);
+            $table->foreignId('category_id')->nullable()->constrained()
+                ->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('product_id')
+                ->constrained()->onDelete('cascade');
+
+            $table->primary(['category_id', 'product_id']);
             $table->timestamps();
         });
     }
+
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('tags');
+        Schema::dropIfExists('category_product');
     }
 };

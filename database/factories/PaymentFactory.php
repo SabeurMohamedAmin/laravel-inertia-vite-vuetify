@@ -25,6 +25,7 @@ class PaymentFactory extends Factory
         $paymentStatuses = ['pending', 'succeeded', 'failed'];
 
         return [
+            'uuid' => Str::uuid(),
             'user_id' => $user->id,
             'order_id' => $order->id,
             'payment_method' => fake()->randomElement($paymentMethods),

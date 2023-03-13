@@ -6,6 +6,8 @@
   import '@splidejs/vue-splide/css';
   import SmallCard from '@/Components/card/SmallCard.vue'
 
+  const props = defineProps({slider:{type:Object}, cards:{type:Object}});
+
   const  {name}  = useDisplay();
   const height = computed(() => {
     switch (name.value) {
@@ -31,10 +33,10 @@
 <template>
   <v-row  class="ma-1 my-4">
         <v-col cols="12" sm="7" lg="8" class="py-0 mb-3">
-          <Splide :options="options" aria-label="My Favorite Images">
-            <SplideSlide v-for="i in 8" :key="i" >
+          <Splide :options="options" aria-label="Product images slider">
+            <SplideSlide v-for="image in props.slider" :key="image.id" >
               <v-img
-                :src="'https://picsum.photos/id/'+(i+75)+'/700'"
+                :src="image.img.url"
                 cover class="rounded-md v-height"
               />
             </SplideSlide>
@@ -42,33 +44,18 @@
         </v-col>
         <v-col cols="12" sm="5" lg="4" class="py-0">
           <v-row>
-              <v-col xs="6" sm="6" v-for="i in 4" :key="i">
-                  <SmallCard />
+              <v-col xs="6" sm="6" v-for="product in cards" :key="product.id">
+                  <SmallCard :productDetails="product" />
               </v-col>
           </v-row>
         </v-col>
   </v-row>
 </template>
-
 <style>
   .splide__arrows .splide__arrow {
-    height: 55px;
-    width: 20px;
-    border-radius: 2px;
     border: 1px solid #35eb9ade;
   }
-  .splide__arrows .splide__arrow>svg{
-    zoom: .8;
-    opacity:.4;
-  }
-  .splide__arrow--next {
-    right : 0.6em ;
-  }
-  .splide__arrow--prev {
-    left : 0.6em;
-  }
   .splide__pagination__page{
-    background: #cccccccc;
     border: 0;
     border-radius: 50%;
     display: inline-block;

@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
+            $table->string('uuid')->unique();
             $table->foreignId('category_id')->constrained()
                 ->onUpdate('cascade')->onDelete('cascade');
             $table->foreignId('discount_id')->constrained()
@@ -28,6 +29,7 @@ return new class extends Migration
             $table->double('amount', 8, 2);
             $table->unsignedInteger('quantity');
             $table->text('description');
+            $table->json('images');
             // this will be in cm
             $table->integer('height');
             // this will be in cm
@@ -36,8 +38,8 @@ return new class extends Migration
             $table->integer('length');
             // this will be in gramme
             $table->integer('weight');
-            $table->string('meta_title')->nullable();
-            $table->string('meta_description')->nullable();
+            $table->text('meta_title')->nullable();
+            $table->text('meta_description')->nullable();
             $table->json('meta_keywords')->nullable();
             $table->timestamps();
         });

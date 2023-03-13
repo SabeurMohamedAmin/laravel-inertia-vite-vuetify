@@ -1,10 +1,11 @@
 <?php
 
+use Inertia\Inertia;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Foundation\Application;
+use App\Http\Controllers\BuildComponent;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
-use Illuminate\Foundation\Application;
-use Illuminate\Support\Facades\Route;
-use Inertia\Inertia;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,27 +22,35 @@ Route::get(
     '/',
     [ProductController::class, 'index']
     /*
-function () {
-    return Inertia::render('HomePage', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-    ]);
-}
-*/
+        function () {
+            return Inertia::render('HomePage', [
+                'canLogin' => Route::has('login'),
+                'canRegister' => Route::has('register'),
+                'laravelVersion' => Application::VERSION,
+                'phpVersion' => PHP_VERSION,
+            ]);
+        }
+    */
 )->name('home');
+
+Route::get(
+    '/products/{slug:slug}',
+    [ProductController::class, 'show']
+)->name('product');
 
 Route::get(
     'add-new-product',
     [ProductController::class, 'create']
 )->name('add.product');
 
+Route::post(
+    'add-new-product',
+    [ProductController::class, 'store']
+)->name('store.product');
+
 // For Developping Only
-Route::get('/cb', function () {
-    return Inertia::render('Build/ComponentBuild')
-        ->with('success', 'test for flash');
-})->name('component.build');
+Route::get('/cb', [BuildComponent::class, 'show'])->name('component.build');
+Route::post('/cb', [BuildComponent::class, 'image'])->name('component.build');
 
 Route::get('/cards', function () {
     return Inertia::render('Build/Cards')

@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('discounts', function (Blueprint $table) {
             $table->id();
+            $table->string('uuid')->unique();
             $table->string('code', 255)->unique();
             //percentage-based vs. fixed amount 5% | 5$
             $table->enum('type', ['percentage', 'fixed']);
