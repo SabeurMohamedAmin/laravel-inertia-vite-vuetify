@@ -75,15 +75,9 @@ const errorsImage = computed(()=>{
         <!-- TO DO CUSTOMIZE -->
         <v-row>
           <v-col cols="12">
-              <UploadImages @update-selected-files="updateSelectedFiles" />
-            <!--
-              <v-file-input
-                v-model="product.images" label="Images" 
-                multiple accept="image/*"  :error-messages="product.errors.images"
-                bg-color="grey-lighten-3" show-size chips
-                >
-              </v-file-input>
-            -->
+            <KeepAlive>
+            <UploadImages @update-selected-files="updateSelectedFiles" />
+            </KeepAlive>
           </v-col>
           <ul class="v-input__details d-flex flex-wrap text-error" v-if="errorsImage">
            <li class="v-messages__message mx-4" v-for="name in errorsImage" :key="name">{{ product.errors[name] }}</li>

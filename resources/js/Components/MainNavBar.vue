@@ -5,7 +5,7 @@ import { usePage } from '@inertiajs/vue3'
   // Declaring and using emits
   const emit = defineEmits(['navDrawerSwitcher', 'cartDrawerSwitcher', 'toggleTheme']);
   // TOOGLE AND ACTIVE THE SHP BTN
-  const activeButtonShop = computed(() => {
+  const activeCurrentLink = computed(() => {
     return route('home')+usePage().url === route('component.build') ? true : false;
   });
   // CHECKING FOR THE THEME USED
@@ -56,7 +56,7 @@ import { usePage } from '@inertiajs/vue3'
     <!--THIS IS FOR SHOP BTN-->
     <Link :href="route('component.build')">
       <v-btn
-        :active="activeButtonShop"
+        :active="activeCurrentLink"
         class="mx-2 text-small"
         size="small"
         rounded="lg"

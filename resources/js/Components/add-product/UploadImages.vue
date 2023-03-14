@@ -1,6 +1,7 @@
 <script setup>
 import { reactive, watch } from "vue";
 import { v4 as uuid } from "uuid";
+import { usePage } from "@inertiajs/vue3";
 import { useFileDialog } from "@/Components/add-product/useFile";
 const emit = defineEmits(['update-selected-files'])
 
@@ -11,6 +12,7 @@ const toMegabytes = 1048576;
 
 const openDialog = () => {
     if(!(selected_files.length < 10)){
+
         alert.state = true;
         alert.message = 'The limit of is 10 images, Please Delete item or more to upload!';
         console.log('Alert and Message : ', alert);
@@ -18,13 +20,16 @@ const openDialog = () => {
     };
     open();
 };
-
+//usePage().errors.images = {'image.10': ' you have accesside to the limit 10 img\'s'}
+usePage().props.flash={success: ' you have accesside to the limit 10 img\'s'};
+//props.flash ? props.flash={failed:null, succes:null} : '';
 watch(files, (newVal) => {
     //CHECK if there 10 img ready to upload show it is the limit
     if( (selected_files.length === 10) || (selected_files.length >= 10) ){
         alert.state = true;
         alert.message = 'Oops the limit of is 10 images';
         console.log('Alert and Message : ', alert);
+        console.log(usePage)
         // reset any File in FileList history Upload after open()
         reset();
         return;
@@ -63,13 +68,13 @@ const uploadImage = async () => {
 
     // TODO: Use an API endpoint to upload the image
 };
-
 </script>
 
 <template>
     <v-row 
         dense class="my-1 h-row scroll-y-transition-move"
     >
+        <!-- btn for upload image-->
         <v-col
             cols="4"
             sm="3"
@@ -89,6 +94,8 @@ const uploadImage = async () => {
                 <v-icon icon="mdi-plus" size="40" />
             </v-btn>
         </v-col>
+
+        <!-- img ready for upload -->
         <v-col
             v-for="(card, index) in selected_files"
             :key="card.id"

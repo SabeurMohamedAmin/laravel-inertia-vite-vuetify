@@ -1,5 +1,5 @@
 <script setup>
-  import { ref, onMounted } from "vue";
+  import { ref, onMounted, computed } from "vue";
   import AlertInfo from '@/Components/AlertInfo.vue';
   import LeftNavBar from "@/Components/LeftNavBar.vue";
   import ShoppingCard from "@/Components/ShoppingCard.vue";
@@ -25,8 +25,14 @@
     localStorage.setItem("choosedTheme", themeName.value);
   }
   function clearFlash(){
-    props.flash ? props.flash={failed:null, succes:null} : '';
+    props.flash ? props.flash={failed:null, success:null} : '';
+    console.log(props)
+    return;
   }
+  const flashValue = computed(()=>{
+    //props.flash={failed:null, success:null}
+    (props.flash && (props.flash.failed || props.flash.success)) ? true : false ;
+  })
 </script>
 
 <template>
@@ -65,7 +71,7 @@
         </v-container>
       </v-main>
       <AlertInfo 
-        v-if="props.flash" :flash="props.flash" 
+        v-if="flashValue" :flash="props.flash" 
         @clear-flash-message="clearFlash"
       />
     </v-app>

@@ -19,17 +19,16 @@
     :to="{ name: 'home' }"
     :active="false"
     tabindex="6" title="Notice !" position="fixed" class="m-2 v-col-8 buttom-2 right-2" 
-    close-label="Close Alert" icon="mdi-cup" text-color="pink" density="compact"
+    close-label="Close Alert" icon="mdi-cup" density="compact"
     rounded="lg" variant="outlined" border="end"
-    border-color="info" elevation="1" 
+    border-color="alert" elevation="1" 
     closable
   >
-    {{props.flash.success}}
-    hflsdnfo oohfksjdnf lnlfns ldfnldsfnkm sdnfkldgljjgbfdqjl j kbgqldfjgb jlqflbg q lksjdbqlj
+    {{props.flash.success}} thank's
   </v-alert>
 </template>
 <style scoped>
-.buttom-2{
-    bottom: 0.5rem;
-}
+  .buttom-2{
+      bottom: 0.5rem;
+  }
 </style>
