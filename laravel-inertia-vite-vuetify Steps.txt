@@ -96,7 +96,7 @@ import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 import { ZiggyVue } from '../../vendor/tightenco/ziggy/dist/vue.m';
 
 
-//Here comes vuetify settings
+//Here comes vuetify 3 settings
 import { createVuetify } from 'vuetify';
 
 //After Enabling treeshaking in vite.config no need for these
