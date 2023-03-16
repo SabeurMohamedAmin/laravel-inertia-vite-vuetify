@@ -1,6 +1,6 @@
 <script setup>
   import {onMounted} from 'vue';
-  import InputForm from '@/Components/add-product/InputFrom.vue';
+  import InputForm from '@/Components/add-product/InputForm.vue';
   
   const props = defineProps({
     categories:{type:Object, default:{0:{id:0, name:'category name'}}},
